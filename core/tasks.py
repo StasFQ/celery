@@ -8,4 +8,4 @@ from celery_hm.celery import app
 
 @shared_task()
 def send_mail(time, message, email):
-        django_send_mail(time, email, 'admin@example.com', [message])
+    django_send_mail(time, email, 'admin@example.com', [message])

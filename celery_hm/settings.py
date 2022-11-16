@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%b##pe=$j34z4=w@^t04h=r!^4%m#@_n(#+^cy2q%p_*2^$(ag'
+SECRET_KEY = os.environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -56,8 +57,7 @@ ROOT_URLCONF = 'celery_hm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Istanbul' #UTC + 2
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
