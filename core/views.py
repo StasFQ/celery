@@ -4,7 +4,7 @@ from datetime import timedelta
 from django.shortcuts import render, redirect
 from .forms import MainForm
 from . import tasks
-
+from django.utils import timezone
 
 def contact_form(request):
     form = MainForm()
@@ -14,7 +14,7 @@ def contact_form(request):
             time = form.cleaned_data['time']
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
-            if time < datetime.timedelta(days=2):
+            if time < (timezone.now() + datetime.timedelta(days=2)):
                 tasks.send_mail.apply_async((time, email, message), eta=time)
             return redirect('core:contact_form')
     return render(request, 'contact.html', {'form': form})
