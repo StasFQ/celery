@@ -6,6 +6,7 @@ from .forms import MainForm
 from . import tasks
 from django.utils import timezone
 
+
 def contact_form(request):
     form = MainForm()
     if request.method == "POST":
