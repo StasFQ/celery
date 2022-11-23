@@ -15,7 +15,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'pars-every-odd-hour': {
         'task': 'core.tasks.parser',
-        'schedule': crontab()
+        'schedule': crontab(minute=0, hour='1-23/2')
     }
 }
 
