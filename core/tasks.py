@@ -26,9 +26,6 @@ def parser():
         for i in range(len(quote_l)):
             quote = soup.find_all('span', {'class': 'text'})[i]
             if not Quote.objects.filter(quote=quote.string).exists():
-                if q_count >= 5:
-                    flag = False
-                    break
                 author = soup.find_all('small', {'class': 'author'})[i]
                 if not Author.objects.filter(name=author.string).exists():
                     a = Author.objects.create(name=author.string)
@@ -41,11 +38,9 @@ def parser():
                 if q_count >= 5:
                     flag = False
                     break
-
         next_page = soup.find('li', {'class': 'next'})
         if not next_page:
-            django_send_mail(subject='Noticfication', message='Quotes ends', from_email='admin@example.com',
-                             recipient_list=['admin@example.com'])
             flag = False
+            django_send_mail('Noticfication', 'Quotes ends', 'admin@example.com', ['admin@example.com'])
             break
         suffix = next_page.a['href']
