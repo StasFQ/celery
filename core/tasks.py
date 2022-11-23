@@ -38,6 +38,9 @@ def parser():
                     a = Author.objects.get(name=author.string)
                     Quote.objects.create(quote=quote.string, author_id=a.id)
                     q_count += 1
+                if q_count >= 5:
+                    flag = False
+                    break
 
         next_page = soup.find('li', {'class': 'next'})
         if not next_page:
