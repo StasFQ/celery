@@ -44,6 +44,8 @@ def parser():
 
         next_page = soup.find('li', {'class': 'next'})
         if not next_page:
+            django_send_mail(subject='Noticfication', message='Quotes ends', from_email='admin@example.com',
+                             recipient_list=['admin@example.com'])
             flag = False
             break
         suffix = next_page.a['href']

@@ -1,7 +1,7 @@
 import os
 
 from celery import Celery
-
+from celery.schedules import crontab
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celery_hm.settings')
 
@@ -11,6 +11,13 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 
 app.autodiscover_tasks()
+
+app.conf.beat_schedule = {
+    'pars-every-odd-hour': {
+        'task': 'core.tasks.parser',
+        'schedule': crontab()
+    }
+}
 
 
 @app.task(bind=True)
